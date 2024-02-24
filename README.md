@@ -1,0 +1,2 @@
+- official repository for the paper: "ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval"
+- The code will be updated soon!
