@@ -1,7 +1,7 @@
 - Official repository for the paper: "ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval"
 - The code will be updated soon!
 - Please email to `soyoung.yoon@snu.ac.kr` for any questions about this work!
-
+- 2024.3.20 Added minimal running examples!
 
 ### Model checkpoints (huggingface)
 1. [RankT5-base](https://huggingface.co/Soyoung97/RankT5-base): `Soyoung97/RankT5-base`
@@ -12,6 +12,9 @@
 
 
 ### How to use
+`python test.py`
+Minimal running example can be run by test.py.
+
 ```
 from FiDT5 import FiDT5
 from transformers import T5Tokenizer
