@@ -1,7 +1,9 @@
-- Official repository for the paper: "ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval"
+Official code repository for the paper: [ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval](https://arxiv.org/abs/2402.15838) (ACL 2024, main)
 - The code will be updated soon!
 - Please email to `soyoung.yoon@snu.ac.kr` for any questions about this work!
 - 2024.3.20 Added minimal running examples!
+- 2024.5.16 Accepted to ACL 2024 main! :)
+- 2024.6.15 Started on the code release... Expected to update the full code within a week! Stay tuned:)
 
 ### Model checkpoints (huggingface)
 1. [RankT5-base](https://huggingface.co/Soyoung97/RankT5-base): `Soyoung97/RankT5-base`
@@ -10,13 +12,32 @@
 4. [ListT5-base](https://huggingface.co/Soyoung97/ListT5-base): `Soyoung97/ListT5-base`
 5. [ListT5-3b](https://huggingface.co/Soyoung97/ListT5-3b): `Soyoung97/ListT5-3b`
 
+### Evaluation Datasets (BEIR)
 
+**Please note that the license follows the original BEIR/MSMARCO license (for academic purposes only) and we are not responsible for any copyright issues.**
+1. [BEIR top-100 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100/tree/main) `Soyoung97/beir-eval-bm25-top100`
+2. [BEIR top-1000 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top1000/tree/main) `Soyoung97/beir-eval-bm25-top1000`
+3. [BEIR top-100 by COCO-DR Large](https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/tree/main) `Soyoung97/beir-eval-cocodr-large-top100`
+
+Tip: click on the indiviual file link, copy the `download` link, and use wget to download each file on your server.
+example:
+```
+wget https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/resolve/main/nfcorpus.jsonl
+```
+- Also planning to release the full training data used! [TBU]
+
+### Running environments
+```
+conda env create -f listt5_conda_env.yml
+```
+Note: torch==2.1.0 (Other versions can be incompatible)
 ### How to use
-`python test.py`
-Minimal running example can be run by test.py.
+
+#### Minimal Running example
+Minimal running example can be run by the following example code.
 
 ```
-from FiDT5 import FiDT5
+from FiDT5 import FiDT5 # Need to clone the repository for this code
 from transformers import T5Tokenizer
 model = FiDT5.from_pretrained('Soyoung97/ListT5-base')
 texts = [
@@ -32,4 +53,9 @@ output = model.generate(**input_tensors, max_length=7, return_dict_in_generate=T
 output_text = tok.batch_decode(output.sequences, skip_special_tokens=True) 
 output_text
 >>> [3 1 4 2 5]
-
+```
+#### Run tournament sort with ListT5
+```
+python3 run_listt5.py
+```
+The `run_listt5.py` code will be updated within one or two days!
