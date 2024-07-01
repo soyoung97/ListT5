@@ -30,7 +30,11 @@ wget https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/res
 ```
 conda env create -f listt5_conda_env.yml
 ```
-Note: torch==2.1.0 (Other versions can be incompatible)
+Note: torch=2.1.0 and transformers=4.33.3 (Other versions can be incompatible)
+a version mismatch can result in errors such as:
+```
+AttributeError: 'EncoderWrapper' object has no attribute 'embed_tokens'
+```
 ### How to use
 
 #### Minimal Running example
@@ -56,6 +60,21 @@ output_text
 ```
 #### Run tournament sort with ListT5
 ```
-python3 run_listt5.py
+python3 run_listt5.py --input_path ./trec-covid.jsonl --output_path ./outputs/listt5-trec-covid.jsonl --bsize 20 
 ```
-The `run_listt5.py` code will be updated within one or two days!
+Sample code outputs ndcg@10: 0.78285 for ListT5-base with out_k=2.
+
+#### Run baseline models (MonoT5, RankT5)
+
+```
+python3 run_monot5_rankt5.py --input_path ./trec-covid.jsonl --output_path ./outputs/monot5-trec-covid.jsonl --bsize 20 --mode monot5
+```
+ndcg@10: 78.26 for monot5 
+
+```
+python3 run_monot5_rankt5.py --input_path ./trec-covid.jsonl --output_path ./outputs/rankt5-trec-covid.jsonl --bsize 20 --model Soyoung97/rankt5-base --mode rankt5
+```
+ndcg@10: 77.731 for rankt5
+
+Please download the above evaluation datasets to try out evaluation for other datasets.
+You can easily run evaluation with your own dataset by adhering with the data format just like the beir dataset.

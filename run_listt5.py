@@ -89,7 +89,7 @@ class ListT5Evaluator():
 
     def make_input_tensors(self, texts):
         raw = self.tok(texts, return_tensors='pt',
-                padding=self.args.padding, max_length=self.args.max_length,
+                padding=self.args.padding, max_length=self.args.max_input_length,
                 truncation=True).to('cuda')
         input_tensors = {'input_ids': raw['input_ids'].unsqueeze(0),
                 'attention_mask': raw['attention_mask'].unsqueeze(0)}
@@ -246,7 +246,7 @@ class ListT5Evaluator():
             raw_tensors_batchwise = [self.tok(x,
                 padding = self.args.padding,
                 return_tensors='pt',
-                max_length = self.args.max_length,
+                max_length = self.args.max_input_length,
                 truncation=True) for x in full_input_texts_batchwise]
             batch_inputids = torch.stack([x['input_ids'] for x in raw_tensors_batchwise]).to('cuda')
             batch_attnmasks = torch.stack([x['attention_mask'] for x in raw_tensors_batchwise]).to('cuda')
@@ -286,13 +286,13 @@ class ListT5Evaluator():
         cached_output = []
         print(f"Running first batchwise iteration..")
         batch_holder = []
-        if os.path.exists(self.args.output_path):
-            temp = read_jsonl(self.args.output_path)
-            print(f'Starting from len: {len(temp)}')
-            len_temp = len(temp)
-            self.test_file = self.test_file[len_temp:]
-        else:
-            temp = []
+        #if os.path.exists(self.args.output_path):
+        #    temp = read_jsonl(self.args.output_path)
+        #    print(f'Starting from len: {len(temp)}')
+        #    len_temp = len(temp)
+        #    self.test_file = self.test_file[len_temp:]
+        #else:
+        temp = []
         for i, instance in tqdm(enumerate(self.test_file), total=len(self.test_file)):
             question = instance[self.args.question_text_key]
             topk_ctxs = [f"{x[self.args.title_key]} {x[self.args.text_key]}".strip() for x in instance[self.args.firststage_result_key]][:self.args.topk]
@@ -432,7 +432,7 @@ def main():
     parser.add_argument('--dummy_number', default=21, type=int)
     parser.add_argument('--verbose', action='store_true')
     parser.add_argument('--seed', default=0, type=int)
-    parser.add_argument('--bsize', default=20, type=int) # depends on your gpu and input length. We recommend input_length->bsize as 256->128, 512->32, 1024->16, 1280->8 for t5-3b with 80GB gpu.
+    parser.add_argument('--bsize', default=20, type=int) # depends on your gpu and input length. We recommend input_length->bsize as 256->128, 512->32, 1024->16, 1280->8 for t5-3b with GB gpu.
     parser.add_argument('--input_path', type=str, default='./trec-covid.jsonl')
     parser.add_argument('--output_path', type=str, default='./outputs/trec-covid.jsonl')
 
@@ -446,10 +446,8 @@ def main():
     res = {}
     random.seed(args.seed)
     args.test_path = args.input_path
-    max_length = 1024
-    args.max_gen_length = args.listwise_k + 3
+    args.max_gen_length = args.listwise_k + 2
     pprint(args)
-    args.max_length = max_length
     if args.max_input_length == -1:
         input_path = args.input_path.split('/')[-1]
         for name in BEIR_LENGTH_MAPPING:
