@@ -1,0 +1,23 @@
+BEIR_LENGTH_MAPPING = {
+        'msmarco': 256,
+        'dl19': 256,
+        'dl20': 256,
+        'nq': 256,
+        'hotpotqa': 256,
+        'signal': 256,
+        'quora': 256,
+        'fever': 256,
+        'climate-fever': 256,
+        'dbpedia-entity': 256,
+        'trec-covid': 512,
+        'nfcorpus': 512,
+        'bioasq': 512,
+        'fiqa': 512,
+        'cqadupstack': 512,
+        'scidocs': 512,
+        'scifact': 512,
+        'news': 1024,
+        'robust04': 1024,
+        'arguana': 1024,
+        'touche': 1024}
+

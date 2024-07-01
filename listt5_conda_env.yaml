@@ -23,11 +23,12 @@ dependencies:
   - pip
   - pip:
     - beir==2.0.0
+    - torch==2.1.0
+    - transformers==4.33.3
     - cmake==3.27.6
     - datasets==2.14.6
     - deepspeed==0.12.2
     - elasticsearch==7.9.1
-    - etils==1.5.0
     - faiss-cpu==1.7.4
     - flax==0.7.5
     - google-auth==2.23.2
@@ -41,7 +42,6 @@ dependencies:
     - keybert==0.8.3
     - lightning-utilities==0.9.0
     - nltk==3.8.1
-    - numpy==1.23.1
     - pytorch-lightning==2.0.9.post0
     - pytrec-eval==0.5
     - pytz==2023.3.post1
@@ -52,10 +52,8 @@ dependencies:
     - setuptools==68.0.0
     - t5x==0.0.0
     - tokenizers==0.12.1
-    - torch==2.1.0
     - torchmetrics==1.2.0
-    - torchvision==0.16.0
     - tqdm
-    - transformers==4.33.3
     - wandb==0.16.0
+    - numpy
 prefix: /opt/conda/envs/listt5
