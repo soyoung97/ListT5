@@ -52,8 +52,8 @@ class ListT5Evaluator():
         self.imsi = []
         self.args = args
         self.tok = T5Tokenizer.from_pretrained(self.args.model_path, legacy=False)
-        self.test_file = read_jsonl(self.args.test_path)
-        print(self.args.test_path)
+        self.test_file = read_jsonl(self.args.input_path)
+        print(f"Input path: {self.args.input_path}")
         self.idx2tokid = self.tok.encode(' '.join([str(x) for x in range(1, self.args.listwise_k+1)]))[:-1]
         self.model = self.load_model()
         self.num_forward = 0
@@ -341,9 +341,9 @@ class ListT5Evaluator():
                 temp.append(instance)
             elif len(topk_ctxs) == 0:
                 temp.append(instance)
-            elif len(topk_ctxs) == 1 or (len(topk_ctxs) <= 10):
+            elif len(topk_ctxs) == 1:
                 if self.args.verbose:
-                    print(f"Length of topk ctxs is 1 (or less than 10 in skip option). skipping.")
+                    print(f"Length of topk ctxs is 1. Skipping reranking.")
                 temp.append(instance)
             else:
                 full_list_idx = list(range(len(topk_ctxs)))
@@ -445,7 +445,6 @@ def main():
         from deepspeed.profiling.flops_profiler import FlopsProfiler
     res = {}
     random.seed(args.seed)
-    args.test_path = args.input_path
     args.max_gen_length = args.listwise_k + 2
     pprint(args)
     if args.max_input_length == -1:
