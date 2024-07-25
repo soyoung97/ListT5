@@ -1,9 +1,9 @@
 Official code repository for the paper: [ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval](https://arxiv.org/abs/2402.15838) (ACL 2024, main)
-- The code will be updated soon!
 - Please email to `soyoung.yoon@snu.ac.kr` for any questions about this work!
 - 2024.3.20 Added minimal running examples!
 - 2024.5.16 Accepted to ACL 2024 main! :)
-- 2024.6.15 Started on the code release... Expected to update the full code within a week! Stay tuned:)
+- 2024.6.15 Started on the code release...
+- 2024.7.25 Uploaded instructions to download training data. Expected to update the training code before the conference starts! Stay tuned:)
 
 ### Model checkpoints (huggingface)
 1. [RankT5-base](https://huggingface.co/Soyoung97/RankT5-base): `Soyoung97/RankT5-base`
@@ -24,8 +24,11 @@ example:
 ```
 wget https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/resolve/main/nfcorpus.jsonl
 ```
-- Also planning to release the full training data used! [TBU]
 
+- The training data used are processed at: https://huggingface.co/datasets/Soyoung97/ListT5-train-data/ and if you wish to get access, please contact soyoung.yoon@snu.ac.kr with your huggingface id!
+- The training data format looks like the following:
+<img width="1656" alt="train_data_sample" src="https://github.com/user-attachments/assets/174904f2-be98-4b24-a17b-4f479576af35">
+ 
 ### Running environments
 ```
 conda env create -f listt5_conda_env.yml
@@ -78,3 +81,17 @@ ndcg@10: 77.731 for rankt5
 
 Please download the above evaluation datasets to try out evaluation for other datasets.
 You can easily run evaluation with your own dataset by adhering with the data format just like the beir dataset.
+
+#### Citation
+If you find this paper \& source code useful, please consider citing our paper:
+```
+@misc{yoon2024listt5listwisererankingfusionindecoder,
+      title={ListT5: Listwise Reranking with Fusion-in-Decoder Improves Zero-shot Retrieval}, 
+      author={Soyoung Yoon and Eunbi Choi and Jiyeon Kim and Hyeongu Yun and Yireun Kim and Seung-won Hwang},
+      year={2024},
+      eprint={2402.15838},
+      archivePrefix={arXiv},
+      primaryClass={cs.IR},
+      url={https://arxiv.org/abs/2402.15838}, 
+}
+```
