@@ -375,8 +375,10 @@ class ListT5Evaluator():
                 if len(saved_topones) == len(full_list_idx): # no need for dummy, exceptional case
                     full_rank = saved_topones
                 else:
-                    other_index = self.get_leftover_idx(saved_topones, len(full_list_idx)-len(saved_topones), full_list_idx)
-                    full_rank = saved_topones + other_index
+                    full_rank = saved_topones[:]
+                    for i in range(len(topk_ctxs)):
+                        if i not in saved_topones:
+                            full_rank.append(i)
                 if len(saved_topones) != len(set(saved_topones)):
                     print("Something wrong!")
                     import pdb; pdb.set_trace()
@@ -397,9 +399,14 @@ class ListT5Evaluator():
                     self.write_jsonl_file(self.args.output_path, temp)
                     print(f"Writing jsonl to {self.args.output_path} done! for length: {len(temp)}")
         print(f'%%%%%%%%%DONE%%%%%%%%%%%')
-        ndcg_10, string = run_rerank_eval(temp, combined=True)
-        print(f"ndcg: {ndcg_10}")
         self.write_jsonl_file(self.args.output_path, temp)
+        print(f"Writing jsonl to {self.args.output_path} done, for full length!")
+        try:
+            ndcg_10, string = run_rerank_eval(temp, combined=True)
+            print(f"ndcg: {ndcg_10}")
+        except:
+            print('Error happened during running run_rerank_eval. skipping evaluation')
+            return 'None', 'None'
         return ndcg_10, string
 
 def run_reranker(args):
