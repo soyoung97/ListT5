@@ -4,6 +4,7 @@ Official code repository for the paper: [ListT5: Listwise Reranking with Fusion-
 - 2024.5.16 Accepted to ACL 2024 main! :)
 - 2024.6.15 Started on the code release...
 - 2024.7.25 Uploaded instructions to download training data. Expected to update the training code before the conference starts! Stay tuned:)
+- 2024.10.15 I'm preparing to organize and open-source the training code, but until then, please refer to the comments [here](https://github.com/soyoung97/ListT5/issues/2#issuecomment-2413030507) to get some information about training ListT5.
 
 ### Model checkpoints (huggingface)
 1. [RankT5-base](https://huggingface.co/Soyoung97/RankT5-base): `Soyoung97/RankT5-base`
@@ -28,7 +29,8 @@ wget https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/res
 - The training data used are processed at: https://huggingface.co/datasets/Soyoung97/ListT5-train-data/ and if you wish to get access, please contact soyoung.yoon@snu.ac.kr with your huggingface id!
 - The training data format looks like the following:
 <img width="1656" alt="train_data_sample" src="https://github.com/user-attachments/assets/174904f2-be98-4b24-a17b-4f479576af35">
- 
+- please refer to the comments [here](https://github.com/soyoung97/ListT5/issues/2#issuecomment-2413030507) to get some information about the training code for ListT5.
+
 ### Running environments
 ```
 conda env create -f listt5_conda_env.yml
