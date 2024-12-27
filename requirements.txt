@@ -1,0 +1,8 @@
+transformers==4.43.1
+torch==2.2.1
+numpy=1.26.4
+deepspeed=0.12.2
+pytorch-lightning==2.0.9.post0
+wandb
+jsonlines
+
