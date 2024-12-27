@@ -95,15 +95,22 @@ You can easily run evaluation with your own dataset by adhering with the data fo
 First, navigate to the `./train_code/` directory. The following are the codes we used to train ListT5-base and ListT5-3B:
 The checkpoints and log files will be saved under the `/outputs/` directory.
 
-T5-base: (the ListT5-base model is the one saved with tfmr_20000)
-```CUDA_VISIBLE_DEVICES=0,1,2,3 python3 train.py --name YOUR_EXP_NAME --do_train --learning_rate 1e-04 --base_model t5-base --train_batch_size 32 --eval_batch_size 32 --num_workers 0 --max_input_length 230 --max_output_length 8 --train-files /PATH/To/TRAIN/FILE/marco-train-coco-top1000-5-20perq.jsonl --eval-files /PATH/TO/VALIDATION/FILE/marco-dev-coco-top1000-5-500.jsonl --lr_scheduler linear --gradient_accumulation_steps 2 --eval_steps 2000 --num_train_epochs 10 --listwise_k 5```
+T5-base: (the ListT5-base model is the one saved with tfmr\_20000)
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3 python3 train.py --name YOUR_EXP_NAME --do_train --learning_rate 1e-04 \
+--base_model t5-base --train_batch_size 32 --eval_batch_size 32 --num_workers 0 --max_input_length 230 \
+--max_output_length 8 --train-files /PATH/To/TRAIN/FILE/marco-train-coco-top1000-5-20perq.jsonl \
+--eval-files /PATH/TO/VALIDATION/FILE/marco-dev-coco-top1000-5-500.jsonl --lr_scheduler linear \
+--gradient_accumulation_steps 2 --eval_steps 2000 --num_train_epochs 10 --listwise_k 5
+```
 
 *Note that validation file is only used to check the loss, not the evaluation result (e.g., ndcg) obtained using torunament sort.
 
-T5-3B: (the ListT5-3B model is the one saved with tfmr_3000)
+T5-3B: (the ListT5-3B model is the one saved with tfmr\_3000)
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train.py --name YOUR_EXP_NAME --do_train --learning_rate 1e-05 --base_model t5-3b --train_batch_size 2 --eval_batch_size 2 --num_workers 0 --max_input_length 128 --max_output_length 7 --train-files /PATH/To/TRAIN/FILE/marco-train-coco-top1000-5-20perq.jsonl --eval-files /PATH/TO/VALIDATION/FILE/marco-dev-coco-top1000-5-500.jsonl --lr_scheduler linear --run_3b --gradient_accumulation_steps 16 --eval_steps 4000 --num_train_epochs 5 --listwise_k 5
 ```
+
 ## Other tips
 * add `--wandb` option if you want to see the loss graph and log experiments.
 * may take 5-10 mins at first to start (deepspeed setup)
