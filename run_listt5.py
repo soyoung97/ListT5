@@ -51,7 +51,12 @@ class ListT5Evaluator():
         self.idx = 0
         self.imsi = []
         self.args = args
-        self.tok = T5Tokenizer.from_pretrained(self.args.model_path, legacy=False)
+        try:
+            self.tok = T5Tokenizer.from_pretrained(self.args.model_path, legacy=False)
+        except:
+            print(f"Some issue with loading the T5Tokenizer from training ({self.args.model_path}), make sure the transformers version is 4.33.3 when running training.")
+            print(f"Fallback to t5-base tokenizer (should not be too much of a problem)")
+            self.tok = T5Tokenizer.from_pretrained('t5-base', legacy=False)
         self.test_file = read_jsonl(self.args.input_path)
         print(f"Input path: {self.args.input_path}")
         self.idx2tokid = self.tok.encode(' '.join([str(x) for x in range(1, self.args.listwise_k+1)]))[:-1]
@@ -459,6 +464,7 @@ def main():
         for name in BEIR_LENGTH_MAPPING:
             if name in input_path:
                 args.max_input_length = BEIR_LENGTH_MAPPING[name]
+                print(f"Setting max input length to {args.max_input_length} for {name}")
         if args.max_input_length == -1:
             print(f"Could not find automatic max_input_length assignment from the following dataset keys: {BEIR_LENGTH_MAPPING.keys()}. Please modify the input_length data name or specify max input length by giving it by arguments.")
             raise Exception

@@ -1,4 +1,4 @@
-transformers==4.43.1
+transformers==4.33.3
 torch==2.2.1
 numpy=1.26.4
 deepspeed=0.12.2

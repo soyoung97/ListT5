@@ -6,6 +6,7 @@ Official code repository for the paper: [ListT5: Listwise Reranking with Fusion-
 - 2024.7.25 Uploaded instructions to download training data. Expected to update the training code before the conference starts! Stay tuned:)
 - 2024.10.15 I'm preparing to organize and open-source the training code, but until then, please refer to the comments [here](https://github.com/soyoung97/ListT5/issues/2#issuecomment-2413030507) to get some information about training ListT5.
 - 2024.12.27 I have finally uploaded the training code for ListT5 (and the positional bias experiments)! Thank you for waiting, and feel free to ask any questions! :)
+- 2024.01.05 I have tested if the training code is replicable and left the replication log at README!
 
 ### Model checkpoints (huggingface)
 1. [RankT5-base](https://huggingface.co/Soyoung97/RankT5-base): `Soyoung97/RankT5-base`
@@ -152,6 +153,22 @@ output: 5
 Epoch 0:   0%|▏                                                                                                                                              | 94/92544 [01:24<23:01:20,  1.12it/s, v_num=
 ```
 </details>
+
+### Model Training Replication Log
+
+With the command above, I re-ran the training code on January 5, 2025, tested on a subset of BEIR, and confirmed that the results are replicable. ([training data](https://huggingface.co/datasets/Soyoung97/ListT5-train-data), [evaluation data](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100))  The slight difference in NDCG@10 performance may be due to hardware differences, as the initial ListT5 was trained on an NVIDIA A100, while the recent experiments ran on A6000. The re-run results were similar to, or slightly better than—the initial model. I have uploaded the [new model]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000/tree/main)) for reference. The results are obtained with out\_k=2.
+
+| Dataset    | init model ([ListT5-base]([Soyoung97/ListT5-base](https://huggingface.co/Soyoung97/ListT5-base/tree/main)), on A100) | re-run model ([ListT5-base-A6000]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000/tree/main))) |
+|------------|--------------------|-------------------------|
+| trec-covid | 78.3%             | 79.0%                  |
+| news       | 48.5%             | 49.2%                  |
+| scidocs    | 17.6%             | 17.7%                  |
+| scifact    | 74.1%             | 74.1%                  |
+| dbpedia    | 43.7%             | 43.9%                  |
+| nfcorpus   | 35.6%             | 35.9%                  |
+| touche     | 33.4%             | 32.5%                  |
+| **Avg.**   | **47.3%**         | **47.5%**              |
+
 
 ### Running the positional bias experiments
 The code to run the positional bias experiments are located in the `./positional_bias_experiments/` directory.
