@@ -18,9 +18,9 @@ Official code repository for the paper: [ListT5: Listwise Reranking with Fusion-
 ### Evaluation Datasets (BEIR)
 
 **Please note that the license follows the original BEIR/MSMARCO license (for academic purposes only) and we are not responsible for any copyright issues.**
-1. [BEIR top-100 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100/tree/main) `Soyoung97/beir-eval-bm25-top100`
-2. [BEIR top-1000 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top1000/tree/main) `Soyoung97/beir-eval-bm25-top1000`
-3. [BEIR top-100 by COCO-DR Large](https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/tree/main) `Soyoung97/beir-eval-cocodr-large-top100`
+1. [BEIR top-100 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100) `Soyoung97/beir-eval-bm25-top100`
+2. [BEIR top-1000 by BM25](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top1000) `Soyoung97/beir-eval-bm25-top1000`
+3. [BEIR top-100 by COCO-DR Large](https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100) `Soyoung97/beir-eval-cocodr-large-top100`
 
 Tip: click on the indiviual file link, copy the `download` link, and use wget to download each file on your server.
 example:
@@ -31,7 +31,6 @@ wget https://huggingface.co/datasets/Soyoung97/beir-eval-cocodr-large-top100/res
 - The training data used are processed at: https://huggingface.co/datasets/Soyoung97/ListT5-train-data/ and if you wish to get access, please contact soyoung.yoon@snu.ac.kr with your huggingface id!
 - The training data format looks like the following:
 <img width="1656" alt="train_data_sample" src="https://github.com/user-attachments/assets/174904f2-be98-4b24-a17b-4f479576af35">
-- please refer to the comments [here](https://github.com/soyoung97/ListT5/issues/2#issuecomment-2413030507) to get some information about the training code for ListT5.
 
 ### Running environments
 ```
@@ -156,9 +155,9 @@ Epoch 0:   0%|▏                                                               
 
 ### Model Training Replication Log
 
-With the command above, I re-ran the training code on January 5, 2025, tested on a subset of BEIR, and confirmed that the results are replicable. ([training data](https://huggingface.co/datasets/Soyoung97/ListT5-train-data), [evaluation data](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100))  The slight difference in NDCG@10 performance may be due to hardware differences, as the initial ListT5 was trained on an NVIDIA A100, while the recent experiments ran on A6000. The re-run results were similar to, or slightly better than—the initial model. I have uploaded the [new model]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000/tree/main)) for reference. The results are obtained with out\_k=2.
+With the command above, I re-ran the training code on January 5, 2025, tested on a subset of BEIR, and confirmed that the results are replicable. ([training data](https://huggingface.co/datasets/Soyoung97/ListT5-train-data), [evaluation data](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100))  The slight difference in NDCG@10 performance may be due to hardware differences, as the initial ListT5 was trained on an NVIDIA A100, while the recent experiments ran on A6000. The re-run results were similar to, or slightly better than—the initial model. I have uploaded the [new model]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000)) for reference. The results are obtained with out\_k=2.
 
-| Dataset    | init model ([ListT5-base]([Soyoung97/ListT5-base](https://huggingface.co/Soyoung97/ListT5-base/tree/main)), on A100) | re-run model ([ListT5-base-A6000]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000/tree/main))) |
+| Dataset    | init model ([ListT5-base]([Soyoung97/ListT5-base](https://huggingface.co/Soyoung97/ListT5-base)), on A100) | re-run model ([ListT5-base-A6000]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000))) |
 |------------|--------------------|-------------------------|
 | trec-covid | 78.3%             | 79.0%                  |
 | news       | 48.5%             | 49.2%                  |
