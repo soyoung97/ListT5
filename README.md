@@ -155,9 +155,9 @@ Epoch 0:   0%|▏                                                               
 
 ### Model Training Replication Log
 
-With the command above, I re-ran the training code on January 5, 2025, tested on a subset of BEIR, and confirmed that the results are replicable. ([training data](https://huggingface.co/datasets/Soyoung97/ListT5-train-data), [evaluation data](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100))  The slight difference in NDCG@10 performance may be due to hardware differences, as the initial ListT5 was trained on an NVIDIA A100, while the recent experiments ran on A6000. The re-run results were similar to, or slightly better than—the initial model. I have uploaded the [new model]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000)) for reference. The results are obtained with out\_k=2.
+With the command above, I re-ran the training code on January 5, 2025, tested on a subset of BEIR, and confirmed that the results are replicable. ([training data](https://huggingface.co/datasets/Soyoung97/ListT5-train-data), [evaluation data](https://huggingface.co/datasets/Soyoung97/beir-eval-bm25-top100))  The slight difference in NDCG@10 performance may be due to hardware differences, as the initial ListT5 was trained on an NVIDIA A100, while the recent experiments ran on A6000. The re-run results were similar to, or slightly better than—the initial model. I have uploaded the [new model](https://huggingface.co/Soyoung97/ListT5-base-A6000) for reference. The results are obtained with out\_k=2.
 
-| Dataset    | init model ([ListT5-base]([Soyoung97/ListT5-base](https://huggingface.co/Soyoung97/ListT5-base)), on A100) | re-run model ([ListT5-base-A6000]([Soyoung97/ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000))) |
+| Dataset    | init model ([ListT5-base](https://huggingface.co/Soyoung97/ListT5-base), on A100) | re-run model ([ListT5-base-A6000](https://huggingface.co/Soyoung97/ListT5-base-A6000)) |
 |------------|--------------------|-------------------------|
 | trec-covid | 78.3%             | 79.0%                  |
 | news       | 48.5%             | 49.2%                  |
