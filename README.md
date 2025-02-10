@@ -105,6 +105,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 train.py --name YOUR_EXP_NAME --do_train --
 ```
 
 *Note that validation file is only used to check the loss, not the evaluation result (e.g., ndcg) obtained using torunament sort.
+*Note that the reported ListT5-base model is only trained with **20000 steps** and then did **early exit**. While we give the learning rate scheduler and warmup steps to 10 epochs, this equals to stopping the training after only 0~1 epochs. Running this on 4x A6000 gpus will only take about 8-10 hours. Similarly, the 3B model is only trained with 3000k steps.
 
 T5-3B: (the ListT5-3B model is the one saved with tfmr\_3000)
 ```
