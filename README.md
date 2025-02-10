@@ -105,7 +105,8 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python3 train.py --name YOUR_EXP_NAME --do_train --
 ```
 
 *Note that validation file is only used to check the loss, not the evaluation result (e.g., ndcg) obtained using torunament sort.
-*Note that the reported ListT5-base model is only trained with **20000 steps** and then did **early exit**. While we give the learning rate scheduler and warmup steps to 10 epochs, this equals to stopping the training after only 0~1 epochs. Running this on 4x A6000 gpus will only take about 8-10 hours. Similarly, the 3B model is only trained with 3000k steps.
+
+*Note that the reported ListT5-base model is only trained with **20000 steps** and then did **early exit**. While we give the learning rate scheduler and warmup steps to 10 epochs, this equals to stopping the training after only 0~1 epochs. Running this on 4x A6000 gpus will only take about 8-10 hours. Similarly, the 3B model is only trained with 3000 steps.
 
 T5-3B: (the ListT5-3B model is the one saved with tfmr\_3000)
 ```
@@ -115,7 +116,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python3 train.py --name YOUR_EXP_NAME --do_
 ## Other tips
 * add `--wandb` option if you want to see the loss graph and log experiments.
 * may take 5-10 mins at first to start (deepspeed setup)
-* if you want to train in order reversed - relevnant index first way, add `--sub_mode posfirst`
+* if you want to train in order reversed - relevant index first way, add `--sub_mode posfirst`
 * resume training: `--resume_from_checkpoint PATH_TO_DEEPSPEED_CKPT_SUCH_AS/epoch\=00-stepglobal_step\=23999.0.ckpt/` Must run with the same number of gpus on initial training.
 * Use ForkedPdb.set_trace() on debugging for multi-gpu training.
 * Running training on T5-base takes 33GB each for 4x A6000 48GB.
